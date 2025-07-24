@@ -59,7 +59,7 @@ flutter_launcher_icons:
   image_path: "assets/icons/siana_ic.png"
   min_sdk_android: 21
   adaptive_icon_background: "#1C2526"  # Dark gray background for Android adaptive icon
-  adaptive_icon_foreground: "assets/icons/siana_ic.png"
+  adaptive_icon_foreground: "assets/icons/siana_ac_b.png"
   web:
     generate: true
     image_path: "assets/icons/siana_ic.png"
