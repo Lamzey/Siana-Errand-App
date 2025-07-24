@@ -78,3 +78,66 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+class CustomButtonTxt extends StatelessWidget {
+  final String text;
+  final VoidCallback? onPressed;
+
+  /// If null, will default to Theme.colorScheme.primary
+  final Color? backgroundColor;
+
+  /// If null, will default to Theme.colorScheme.onPrimary
+  final Color? textColor;
+  final Color? bgColor;
+
+  /// Height of the button
+  final double height;
+  final double width;
+
+  /// Corner radius
+  final double borderRadius;
+
+  /// If null, will default to Theme.textTheme.labelLarge
+  final TextStyle? textStyle;
+
+  const CustomButtonTxt({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.backgroundColor,
+    this.textColor,
+    this.height = 56,
+    this.width = double.infinity,
+    this.borderRadius = 28,
+    this.textStyle,
+    this.bgColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final defaultBg = backgroundColor ?? scheme.primary;
+    final defaultText = textColor ?? scheme.onPrimary;
+
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: Center(child: Text(text, style: textStyle)),
+      ),
+    );
+  }
+}

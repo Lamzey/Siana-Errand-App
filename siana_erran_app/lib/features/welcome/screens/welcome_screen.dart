@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
+import 'package:siana_erran_app/features/auth/screens/auth_screen.dart';
 import 'package:siana_erran_app/features/welcome/widgets/welcome_txt.dart';
 import 'package:siana_erran_app/providers/theme_provider.dart';
 import 'package:siana_erran_app/widgets/custom_btn.dart';
@@ -80,7 +81,12 @@ class WelcomeScreen extends StatelessWidget {
               // Button always black bg & white text
               CustomButton(
                 text: buttonText,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AuthScreen()),
+                  );
+                },
                 backgroundColor: isDark ? Colors.grey.shade800 : Colors.black,
                 textColor: Colors.white,
                 height: 48,
