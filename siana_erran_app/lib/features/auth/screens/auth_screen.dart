@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
+import 'package:siana_erran_app/features/auth/screens/signup_screen.dart';
 import 'package:siana_erran_app/providers/theme_provider.dart';
 import 'package:siana_erran_app/widgets/custom_btn.dart';
 
@@ -58,7 +59,12 @@ class AuthScreen extends StatelessWidget {
               // Sign up button
               CustomButtonTxt(
                 text: "Sign Up",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                  );
+                },
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.9,
                 borderRadius: 25,
