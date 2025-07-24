@@ -1,185 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
+import 'package:siana_erran_app/features/welcome/widgets/welcome_txt.dart';
+import 'package:siana_erran_app/providers/theme_provider.dart';
+import 'package:siana_erran_app/widgets/custom_btn.dart';
 import 'package:siana_erran_app/widgets/custom_logo.dart';
 
-// Main Welcome Screen
 class WelcomeScreen extends StatelessWidget {
   final String title;
   final String subtitle;
   final String buttonText;
-  final VoidCallback? onButtonPressed;
-  final Color primaryColor;
-  final Color backgroundColor;
   final String? logoAsset;
 
   const WelcomeScreen({
-    Key? key,
+    super.key,
     this.title = 'Welcome to SIANA',
     this.subtitle =
         'The Errand Platform. Discover how we connect you with local agents for all your errands.',
     this.buttonText = 'Get Started',
-    this.onButtonPressed,
-    this.primaryColor = const Color(0xFF4A90E2),
-    this.backgroundColor = const Color(0xFFF5F5F5),
     this.logoAsset = '${iconPath}siana_ac_b.png',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
+    final textColor = isDark ? Colors.white : Colors.black;
+    var themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+
+    final asset = themeProvider.getThemedAsset(
+      context,
+      lightAsset: "${iconPath}siana_ac_b.png",
+      darkAsset: "${iconPath}siana_ic.png",
+    );
+
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             children: [
-              // Header with logo
-              const SizedBox(height: 40),
-              CustomLogo(logoAsset: logoAsset, size: 100),
+              const SizedBox(height: 20),
 
-              const SizedBox(height: 60),
+              // Logo tinted by onSurface color
+              CustomLogo(logoAsset: asset, size: 100),
 
-              // Main illustration card
+              const SizedBox(height: 50),
+
+              // Illustration – you could also swap to a dark‑mode variant via ThemeProvider
               Expanded(
                 child: Image.asset(
-                  "${imagePath}onboarding_image_one.png",
-                  width: 300,
+                  '${imagePath}onboarding_image_one.png',
+                  width: MediaQuery.of(context).size.width * 0.9,
                   height: 300,
                 ),
               ),
 
               const SizedBox(height: 40),
 
-              // Welcome text section
-              WelcomeTextSection(title: title, subtitle: subtitle),
+              WelcomeTextSection(
+                title: title,
+                subtitle: subtitle,
+                titleStyle: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+                subtitleStyle: TextStyle(
+                  fontSize: 18,
+                  height: 1.5,
+                  color: textColor,
+                ),
+              ),
 
               const SizedBox(height: 40),
 
-              // Get started button
+              // Button always black bg & white text
               CustomButton(
                 text: buttonText,
-                onPressed: onButtonPressed,
-                backgroundColor: Colors.black87,
+                onPressed: () {},
+                backgroundColor: isDark ? Colors.grey.shade800 : Colors.black,
+                textColor: Colors.white,
+                height: 48,
+                borderRadius: 12,
+                textStyle: theme.textTheme.labelLarge!.copyWith(fontSize: 20),
               ),
-
               const SizedBox(height: 40),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-// Welcome Text Section Component
-class WelcomeTextSection extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final TextStyle? titleStyle;
-  final TextStyle? subtitleStyle;
-
-  const WelcomeTextSection({
-    Key? key,
-    required this.title,
-    required this.subtitle,
-    this.titleStyle,
-    this.subtitleStyle,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style:
-              titleStyle ??
-              const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-          textAlign: TextAlign.center,
-        ),
-
-        const SizedBox(height: 16),
-
-        Text(
-          subtitle,
-          style:
-              subtitleStyle ??
-              TextStyle(fontSize: 16, color: Colors.grey.shade600, height: 1.5),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-}
-
-// Custom Button Component
-class CustomButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final Color backgroundColor;
-  final Color textColor;
-  final double height;
-  final double borderRadius;
-  final TextStyle? textStyle;
-  final String? arrowIconAsset;
-
-  const CustomButton({
-    Key? key,
-    required this.text,
-    this.onPressed,
-    this.backgroundColor = Colors.black87,
-    this.textColor = Colors.white,
-    this.height = 56,
-    this.borderRadius = 28,
-    this.textStyle,
-    this.arrowIconAsset = 'assets/icons/arrow_forward.png',
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: height,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          foregroundColor: textColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-          elevation: 0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              style:
-                  textStyle ??
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(width: 8),
-            arrowIconAsset != null
-                ? Image.asset(
-                    arrowIconAsset!,
-                    width: 20,
-                    height: 20,
-                    color: textColor,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        Icons.arrow_forward,
-                        size: 20,
-                        color: textColor,
-                      );
-                    },
-                  )
-                : Icon(Icons.arrow_forward, size: 20, color: textColor),
-          ],
         ),
       ),
     );

@@ -20,7 +20,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // Helper method to convert custom AppThemeMode to Flutter's ThemeMode
   ThemeMode _convertToThemeMode(dynamic appThemeMode) {
     // Adjust this based on your AppThemeMode enum values
     switch (appThemeMode.toString()) {
@@ -44,9 +43,9 @@ class MyApp extends StatelessWidget {
           darkTheme: darkTheme,
           themeMode: _convertToThemeMode(
             themeProvider.themeMode,
-          ), // Convert custom theme mode
+          ),
           home: const AppLaunchPage(),
-          debugShowCheckedModeBanner: false, // Optional: remove debug banner
+          debugShowCheckedModeBanner: false, 
         );
       },
     );
