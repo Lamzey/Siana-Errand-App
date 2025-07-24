@@ -9,7 +9,9 @@ import 'package:siana_erran_app/providers/theme_provider.dart';
 void main() {
   runApp(
     MultiProvider(
-      providers: [Provider<ThemeProvider>(create: (_) => ThemeProvider())],
+      providers: [
+        ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -18,46 +20,72 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // Helper method to convert custom AppThemeMode to Flutter's ThemeMode
+  ThemeMode _convertToThemeMode(dynamic appThemeMode) {
+    // Adjust this based on your AppThemeMode enum values
+    switch (appThemeMode.toString()) {
+      case 'AppThemeMode.light':
+        return ThemeMode.light;
+      case 'AppThemeMode.dark':
+        return ThemeMode.dark;
+      case 'AppThemeMode.system':
+      default:
+        return ThemeMode.system;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Siana',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
-      home: const MyHomePage(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          title: 'Siana',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: _convertToThemeMode(
+            themeProvider.themeMode,
+          ), // Convert custom theme mode
+          home: const AppLaunchPage(),
+          debugShowCheckedModeBanner: false, // Optional: remove debug banner
+        );
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class AppLaunchPage extends StatefulWidget {
+  const AppLaunchPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<AppLaunchPage> createState() => _AppLaunchPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _AppLaunchPageState extends State<AppLaunchPage> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
-    final asset = themeProvider.getThemedAsset(
-      context,
-      lightAsset: "${iconPath}siana_ic.png",
-      darkAsset: "${iconPath}siana_ac_b.png",
-    );
-
-    return LaunchScreen(
-      logoAsset: asset,
-      backgroundColor: Colors.black, // Dark gray
-      logoColor: Colors.white,
-      logoSize: 120,
-      displayDuration: const Duration(seconds: 2),
-      showLoadingIndicator: true,
-      onAnimationComplete: () {
-        Navigator.pushReplacement(
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        final asset = themeProvider.getThemedAsset(
           context,
-          MaterialPageRoute(builder: (context) => WelcomeScreen()),
+          lightAsset: "${iconPath}siana_ac_b.png",
+          darkAsset: "${iconPath}siana_ic.png",
+        );
+
+        return LaunchScreen(
+          logoAsset: asset,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          logoColor: Theme.of(context).primaryColor,
+          logoSize: 250,
+          displayDuration: const Duration(seconds: 2),
+          showLoadingIndicator: true,
+          onAnimationComplete: () {
+            if (mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+              );
+            }
+          },
         );
       },
     );

@@ -35,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
             children: [
               // Header with logo
               const SizedBox(height: 40),
-              CustomLogo(logoAsset: logoAsset),
+              CustomLogo(logoAsset: logoAsset, size: 100),
 
               const SizedBox(height: 60),
 
