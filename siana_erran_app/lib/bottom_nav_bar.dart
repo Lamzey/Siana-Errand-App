@@ -10,65 +10,70 @@ import 'package:siana_erran_app/features/wallet/screens/wallet_screen.dart';
 class BottomNavBar extends StatefulWidget {
   final int? initialIndex;
 
-  const BottomNavBar({
-    super.key,
-    this.initialIndex,
-  });
+  const BottomNavBar({super.key, this.initialIndex});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+  final PersistentTabController _controller = PersistentTabController(
+    initialIndex: 0,
+    clearHistoryOnInitialIndex: true,
+  );
 
   List<PersistentTabConfig> _tabs() => [
-        PersistentTabConfig(
-          screen: HomeScreen(),
-          item: ItemConfig(
-            icon: const Icon(PhosphorIconsRegular.house),
-            title: "Home",
-          ),
-        ),
-        PersistentTabConfig(
-          screen: OrdersScreen(),
-          item: ItemConfig(
-            icon: const Icon(PhosphorIconsRegular.shoppingBag),
-            title: "Orders",
-          ),
-        ),
-        PersistentTabConfig(
-          screen: WalletScreen(),
-          item: ItemConfig(
-            icon: const Icon(PhosphorIconsRegular.wallet),
-            title: "Wallet",
-          ),
-        ),
-        PersistentTabConfig(
-          screen: ProfileScreen(),
-          item: ItemConfig(
-            icon: const Icon(PhosphorIconsRegular.user),
-            title: "Profile",
-          ),
-        ),
-        PersistentTabConfig(
-          screen: SettingsScreen(),
-          item: ItemConfig(
-            icon: const Icon(PhosphorIconsRegular.gear),
-            title: "Settings",
-          ),
-        ),
-
-      ];
+    PersistentTabConfig(
+      screen: HomeScreen(),
+      item: ItemConfig(
+        inactiveForegroundColor: Colors.grey.shade500,
+        icon: const Icon(PhosphorIconsRegular.house),
+        title: "Home",
+      ),
+    ),
+    PersistentTabConfig(
+      screen: OrdersScreen(),
+      item: ItemConfig(
+        inactiveForegroundColor: Colors.grey.shade500,
+        icon: const Icon(PhosphorIconsRegular.shoppingBag),
+        title: "Orders",
+      ),
+    ),
+    PersistentTabConfig(
+      screen: WalletScreen(),
+      item: ItemConfig(
+        inactiveForegroundColor: Colors.grey.shade500,
+        icon: const Icon(PhosphorIconsRegular.wallet),
+        title: "Wallet",
+      ),
+    ),
+    PersistentTabConfig(
+      screen: ProfileScreen(),
+      item: ItemConfig(
+        inactiveForegroundColor: Colors.grey.shade500,
+        icon: const Icon(PhosphorIconsRegular.user),
+        title: "Profile",
+      ),
+    ),
+    PersistentTabConfig(
+      screen: SettingsScreen(),
+      item: ItemConfig(
+        inactiveForegroundColor: Colors.grey.shade500,
+        icon: const Icon(PhosphorIconsRegular.gear),
+        title: "Settings",
+      ),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       tabs: _tabs(),
       controller: _controller,
-      navBarBuilder: (navBarConfig) => Style1BottomNavBar(
+      navBarBuilder: (navBarConfig) => Style6BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: NavBarDecoration(
+          padding: EdgeInsets.only(left: 10, right: 10),
           borderRadius: BorderRadius.circular(0),
         ),
       ),
