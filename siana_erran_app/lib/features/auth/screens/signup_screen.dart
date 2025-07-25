@@ -1,11 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/auth/widgets/customTextfield_widgets.dart';
 import 'package:siana_erran_app/features/auth/widgets/roleSelection_Card_widget.dart';
 import 'package:siana_erran_app/features/auth/widgets/social_logins_btn.dart';
 import 'package:siana_erran_app/widgets/custom_logo.dart';
-
 
 // Main SignUp Screen
 class SignUpScreen extends StatefulWidget {
@@ -22,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _confirmPasswordController = TextEditingController();
 
   String selectedRole = 'Client';
+  bool isIos = Platform.isIOS;
 
   @override
   void dispose() {
@@ -59,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24),
           child: Form(
             key: _formKey,
             child: Column(
@@ -96,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: RoleSelectionCard(
                         title: 'Client',
                         subtitle: 'Request errands\nfor swift delivery',
-                        icon: Icons.person_outline,
+                        icon: "${iconPath}user.png",
                         isSelected: selectedRole == 'Client',
                         onTap: () => setState(() => selectedRole = 'Client'),
                       ),
@@ -106,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: RoleSelectionCard(
                         title: 'Errand Bird',
                         subtitle: 'Deliver errands\nand earn on the go',
-                        icon: Icons.delivery_dining,
+                        icon: "${iconPath}errand_box.png",
                         isSelected: selectedRole == 'Errand Bird',
                         onTap: () =>
                             setState(() => selectedRole = 'Errand Bird'),
@@ -124,16 +127,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   prefixIcon: Icons.email_outlined,
                   controller: _emailController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Please enter your email';
                     }
-                    if (!value.contains('@')) {
+                    final trimmedValue = value.trim();
+                    final regex = RegExp(
+                      r'^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$',
+                    );
+                    if (!regex.hasMatch(trimmedValue)) {
                       return 'Please enter a valid email';
                     }
                     return null;
                   },
                 ),
-
                 const SizedBox(height: 20),
 
                 // Password Field
@@ -179,21 +185,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // Create Account Button
                 SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: 40,
                   child: ElevatedButton(
                     onPressed: _handleCreateAccount,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black87,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       elevation: 0,
                     ),
                     child: const Text(
                       'Create Account',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -203,33 +209,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 20),
 
                 // Social Login Buttons
-                Row(
+                Wrap(
                   children: [
                     Expanded(
                       child: SocialLoginButton(
                         text: 'Google',
-                        icon: Icons.g_mobiledata,
+                        icon: PhosphorIcons.googleLogo(),
                         backgroundColor: Colors.white,
                         textColor: Colors.black87,
+                        width: isIos ? double.infinity : 130,
                         onPressed: () => _handleSocialLogin('Google'),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: isIos ? 0 : 8, height: isIos ? 0 : 10),
                     Expanded(
                       child: SocialLoginButton(
                         text: 'Facebook',
+                        icon: PhosphorIconsFill.facebookLogo,
                         backgroundColor: const Color(0xFF1877F2),
                         textColor: Colors.white,
                         onPressed: () => _handleSocialLogin('Facebook'),
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: SocialLoginButton(
-                        text: 'Apple',
-                        backgroundColor: Colors.black87,
-                        textColor: Colors.white,
-                        onPressed: () => _handleSocialLogin('Apple'),
+                    SizedBox(width: isIos ? 0 : 8, height: isIos ? 0 : 10),
+
+                    Visibility(
+                      visible: isIos,
+                      child: Expanded(
+                        child: SocialLoginButton(
+                          text: 'Apple',
+                          icon: PhosphorIcons.appleLogo(),
+                          backgroundColor: Colors.black87,
+                          textColor: Colors.white,
+                          onPressed: () => _handleSocialLogin('Apple'),
+                        ),
                       ),
                     ),
                   ],
@@ -247,11 +260,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
-                      child: const Text(
+                      child: Text(
                         'Log in',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.blue,
+                          color: Colors.blueGrey.shade700,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -272,20 +285,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Colors.grey.shade600,
                         height: 1.5,
                       ),
-                      children: const [
-                        TextSpan(text: 'By signing up, you agree to our '),
+                      children: [
+                        const TextSpan(
+                          text: 'By signing up, you agree to our ',
+                        ),
                         TextSpan(
                           text: 'Terms & Conditions',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.blueGrey.shade700,
                             decoration: TextDecoration.underline,
                           ),
                         ),
-                        TextSpan(text: ' and '),
+                        const TextSpan(text: ' and '),
                         TextSpan(
                           text: 'Privacy Policy',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.blueGrey.shade700,
                             decoration: TextDecoration.underline,
                           ),
                         ),

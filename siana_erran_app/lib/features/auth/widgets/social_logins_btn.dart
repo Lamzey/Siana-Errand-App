@@ -1,4 +1,3 @@
-
 // Reusable Social Login Button Widget
 import 'package:flutter/material.dart';
 
@@ -8,6 +7,7 @@ class SocialLoginButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final VoidCallback onPressed;
+  final double width;
 
   const SocialLoginButton({
     super.key,
@@ -16,13 +16,14 @@ class SocialLoginButton extends StatelessWidget {
     required this.backgroundColor,
     required this.textColor,
     required this.onPressed,
+    this.width = 180,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
-      height: 44,
+      width: width,
+      height: 40,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -30,24 +31,25 @@ class SocialLoginButton extends StatelessWidget {
           foregroundColor: textColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
             side: backgroundColor == Colors.white
-                ? BorderSide(color: Colors.grey.shade300)
+                ? BorderSide(color: Colors.grey.shade50)
                 : BorderSide.none,
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (icon != null) ...[
               Icon(icon, size: 18),
-              const SizedBox(width: 8),
+              const SizedBox(width: 5),
             ],
             Text(
               text,
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 color: textColor,
               ),
             ),

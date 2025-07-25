@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class RoleSelectionCard extends StatelessWidget {
   final String title;
   final String subtitle;
-  final IconData icon;
+  final String icon;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -26,12 +26,14 @@ class RoleSelectionCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        width: 163,
+        height: 180,
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isSelected ? Colors.grey.shade200 : Colors.grey.shade50,
           border: Border.all(
-            color: isSelected ? Colors.blue : Colors.grey.shade300,
-            width: isSelected ? 2 : 1,
+            color: isSelected ? Colors.grey.shade800 : Colors.grey.shade300,
+            width: isSelected ? 2.5 : 1.5,
           ),
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
@@ -45,7 +47,7 @@ class RoleSelectionCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 32, color: Colors.black87),
+            Image.asset(icon, width: 32, height: 32, color: Colors.black87),
             const SizedBox(height: 8),
             Text(
               title,
@@ -65,16 +67,25 @@ class RoleSelectionCard extends StatelessWidget {
             Container(
               width: 20,
               height: 20,
+              padding: EdgeInsets.all(3),
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: isSelected ? Colors.blue : Colors.grey.shade400,
                   width: 2,
                 ),
-                color: isSelected ? Colors.blue : Colors.transparent,
+                color: Colors.transparent,
               ),
               child: isSelected
-                  ? const Icon(Icons.check, size: 12, color: Colors.white)
+                  ? Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: const Color.fromARGB(255, 79, 111, 240),
+                      ),
+                    )
                   : null,
             ),
           ],
