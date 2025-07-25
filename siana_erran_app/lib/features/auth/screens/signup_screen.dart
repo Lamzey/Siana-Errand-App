@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:siana_erran_app/bottom_nav_bar.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/auth/screens/login_screen.dart';
 import 'package:siana_erran_app/features/auth/widgets/customTextfield_widgets.dart';
@@ -335,6 +337,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _handleCreateAccount() {
+    pushReplacementWithNavBar(
+      context,
+      MaterialPageRoute(builder: (context) => BottomNavBar(initialIndex: 0)),
+    );
     if (_formKey.currentState!.validate()) {
       // TODO: Implement account creation logic
       ScaffoldMessenger.of(context).showSnackBar(
@@ -347,6 +353,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _handleSocialLogin(String provider) {
+    pushReplacementWithNavBar(
+      context,
+      MaterialPageRoute(builder: (context) => BottomNavBar(initialIndex: 0)),
+    );
     // TODO: Implement social login
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

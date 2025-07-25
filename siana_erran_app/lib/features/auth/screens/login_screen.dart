@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:siana_erran_app/bottom_nav_bar.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/auth/screens/signup_screen.dart';
 import 'package:siana_erran_app/features/auth/widgets/customTextfield_widgets.dart';
@@ -195,8 +197,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 24),
 
-              
-
                 const SizedBox(height: 24),
 
                 // OR Divider
@@ -242,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () => _handleSocialLogin('Google'),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 14),
 
                     // Facebook Button
@@ -349,14 +349,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleLogin() {
+    pushReplacementWithNavBar(
+      context,
+      MaterialPageRoute(builder: (context) => BottomNavBar(initialIndex: 0)),
+    );
     if (_formKey.currentState!.validate()) {
       // TODO: Implement login logic
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Logging in as $selectedRole...'),
-          backgroundColor: Colors.green,
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text('Logging in as $selectedRole...'),
+      //     backgroundColor: Colors.green,
+      //   ),
+      // );
     }
   }
 
@@ -370,15 +374,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _handlePhoneLogin() {
-    // TODO: Implement phone login
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Phone login pressed'),
-        backgroundColor: Colors.orange,
-      ),
-    );
-  }
+  // void _handlePhoneLogin() {
+  //   // TODO: Implement phone login
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     const SnackBar(
+  //       content: Text('Phone login pressed'),
+  //       backgroundColor: Colors.orange,
+  //     ),
+  //   );
+  // }
 
   void _handleForgotPassword() {
     // TODO: Navigate to forgot password screen

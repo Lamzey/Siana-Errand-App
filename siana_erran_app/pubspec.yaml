@@ -37,6 +37,7 @@ dependencies:
   shared_preferences: ^2.5.3
   provider: ^6.1.5
   phosphor_flutter: ^2.1.0
+  persistent_bottom_nav_bar_v2: ^6.1.0
 
 dev_dependencies:
   flutter_test:
