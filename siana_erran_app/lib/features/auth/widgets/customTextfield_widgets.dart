@@ -8,8 +8,11 @@ class CustomTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  Color? hintColor;
+  Color? fillColor;
+  
 
-  const CustomTextField({
+  CustomTextField({
     super.key,
     required this.label,
     required this.hintText,
@@ -17,6 +20,8 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.controller,
     this.validator,
+    required this.hintColor,
+    required this.fillColor, 
   });
 
   @override
@@ -44,11 +49,16 @@ class CustomTextField extends StatelessWidget {
             validator: validator,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+              filled: true,
+              fillColor: fillColor,
+              hintStyle: TextStyle(color: hintColor, fontSize: 14),
               prefixIcon: prefixIcon != null
-                  ? Icon(prefixIcon, color: Colors.grey.shade600, size: 20)
+                  ? Icon(prefixIcon, color: hintColor, size: 20)
                   : null,
-              border: InputBorder.none,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide.none,
+              ),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 12,

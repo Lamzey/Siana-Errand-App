@@ -8,6 +8,8 @@ class SocialLoginButton extends StatelessWidget {
   final Color textColor;
   final VoidCallback onPressed;
   final double width;
+  final double iconSize;
+  final double fontSize;
 
   const SocialLoginButton({
     super.key,
@@ -17,6 +19,8 @@ class SocialLoginButton extends StatelessWidget {
     required this.textColor,
     required this.onPressed,
     this.width = 180,
+    this.iconSize = 18,
+    this.fontSize = 14,
   });
 
   @override
@@ -34,7 +38,7 @@ class SocialLoginButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             side: backgroundColor == Colors.white
                 ? BorderSide(color: Colors.grey.shade50)
-                : BorderSide.none,
+                : BorderSide(color: Colors.white),
           ),
         ),
         child: Row(
@@ -42,13 +46,13 @@ class SocialLoginButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 18),
+              Icon(icon, size: iconSize),
               const SizedBox(width: 5),
             ],
             Text(
               text,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: fontSize,
                 fontWeight: FontWeight.w400,
                 color: textColor,
               ),

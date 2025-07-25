@@ -98,6 +98,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     Expanded(
                       child: RoleSelectionCard(
+                        selectedColor: Colors.grey.shade200,
+                        selectedBorderColor: Colors.grey.shade800,
                         title: 'Client',
                         subtitle: 'Request errands\nfor swift delivery',
                         icon: "${iconPath}user.png",
@@ -108,6 +110,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: RoleSelectionCard(
+                        selectedColor: Colors.grey.shade200,
+                        selectedBorderColor: Colors.grey.shade800,
                         title: 'Errand Bird',
                         subtitle: 'Deliver errands\nand earn on the go',
                         icon: "${iconPath}errand_box.png",
@@ -125,6 +129,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomTextField(
                   label: 'Email Address',
                   hintText: 'you@example.com',
+                  hintColor: Colors.grey.shade600,
+                  fillColor: Colors.grey.shade300,
                   prefixIcon: Icons.email_outlined,
                   controller: _emailController,
                   validator: (value) {
@@ -147,6 +153,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomTextField(
                   label: 'Password',
                   hintText: '••••••••',
+                  hintColor: Colors.grey.shade600,
+                  fillColor: Colors.grey.shade300,
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   controller: _passwordController,
@@ -167,6 +175,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 CustomTextField(
                   label: 'Confirm Password',
                   hintText: '••••••••',
+                  hintColor: Colors.grey.shade600,
+                  fillColor: Colors.grey.shade300,
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   controller: _confirmPasswordController,

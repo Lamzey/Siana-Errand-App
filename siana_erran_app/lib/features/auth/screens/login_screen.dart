@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
+import 'package:siana_erran_app/features/auth/screens/signup_screen.dart';
 import 'package:siana_erran_app/features/auth/widgets/customTextfield_widgets.dart';
 import 'package:siana_erran_app/features/auth/widgets/roleSelection_Card_widget.dart';
 import 'package:siana_erran_app/features/auth/widgets/social_logins_btn.dart';
@@ -77,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Expanded(
                       child: RoleSelectionCard(
+                        selectedColor: Colors.transparent,
+                        selectedBorderColor: Colors.grey.shade200,
+                        iconSelectedColor: Colors.white,
                         title: 'Client',
                         subtitle: 'Request errands\nfor swift delivery',
                         icon: "${iconPath}user.png",
@@ -87,6 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: RoleSelectionCard(
+                        selectedColor: Colors.transparent,
+                        selectedBorderColor: Colors.grey.shade200,
+                        iconSelectedColor: Colors.white,
                         title: 'Errand Bird',
                         subtitle: 'Deliver errands\nand earn on the go',
                         icon: "${iconPath}errand_box.png",
@@ -104,6 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextField(
                   label: 'Email Address',
                   hintText: 'Enter your email',
+                  hintColor: Colors.grey,
+                  fillColor: Color(0xFF393d47),
                   prefixIcon: Icons.email_outlined,
                   controller: _emailController,
                   validator: (value) {
@@ -126,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomTextField(
                   label: 'Password',
                   hintText: 'Enter your password',
+                  hintColor: Colors.grey,
+                  fillColor: Color(0xFF393d47),
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   controller: _passwordController,
@@ -184,41 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 24),
 
-                // Continue with Phone Number Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: OutlinedButton(
-                    onPressed: _handlePhoneLogin,
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      side: BorderSide(color: Colors.grey.shade600, width: 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          PhosphorIcons.phone(),
-                          size: 18,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'Continue with Phone Number',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              
 
                 const SizedBox(height: 24),
 
@@ -250,20 +227,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Social Login Buttons - Stacked Vertically
                 Column(
                   children: [
+                    const SizedBox(height: 24),
                     // Google Button
                     SizedBox(
                       width: double.infinity,
                       height: 48,
                       child: SocialLoginButton(
                         text: 'Continue with Google',
+                        fontSize: 18,
                         icon: PhosphorIcons.googleLogo(),
-                        backgroundColor: Colors.white,
-                        textColor: Colors.black87,
+                        iconSize: 24,
+                        backgroundColor: Colors.transparent,
+                        textColor: Colors.white,
                         onPressed: () => _handleSocialLogin('Google'),
                       ),
                     ),
                     
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 14),
 
                     // Facebook Button
                     SizedBox(
@@ -271,8 +251,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 48,
                       child: SocialLoginButton(
                         text: 'Continue with Facebook',
-                        icon: PhosphorIconsFill.facebookLogo,
-                        backgroundColor: const Color(0xFF1877F2),
+                        fontSize: 18,
+                        icon: PhosphorIcons.facebookLogo(),
+                        iconSize: 24,
+                        backgroundColor: Colors.transparent,
                         textColor: Colors.white,
                         onPressed: () => _handleSocialLogin('Facebook'),
                       ),
@@ -280,14 +262,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     // Apple Button (iOS only)
                     if (isIos) ...[
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 14),
                       SizedBox(
                         width: double.infinity,
                         height: 48,
                         child: SocialLoginButton(
                           text: 'Continue with Apple',
+                          fontSize: 18,
                           icon: PhosphorIcons.appleLogo(),
-                          backgroundColor: Colors.black87,
+                          iconSize: 24,
+                          backgroundColor: Colors.transparent,
                           textColor: Colors.white,
                           onPressed: () => _handleSocialLogin('Apple'),
                         ),
@@ -408,6 +392,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleSignUp() {
     // TODO: Navigate to sign up screen
-    Navigator.of(context).pushNamed('/signup');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SignUpScreen()),
+    );
   }
 }

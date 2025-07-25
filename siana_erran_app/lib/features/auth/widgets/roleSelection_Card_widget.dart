@@ -1,7 +1,3 @@
-
-
-
-
 // Reusable Role Selection Card Widget
 import 'package:flutter/material.dart';
 
@@ -11,14 +7,20 @@ class RoleSelectionCard extends StatelessWidget {
   final String icon;
   final bool isSelected;
   final VoidCallback onTap;
+  Color? selectedColor;
+  Color? iconSelectedColor;
+  Color selectedBorderColor;
 
-  const RoleSelectionCard({
+  RoleSelectionCard({
     super.key,
     required this.title,
     required this.subtitle,
     required this.icon,
     required this.isSelected,
     required this.onTap,
+    required this.selectedColor,
+    required this.selectedBorderColor,
+    this.iconSelectedColor = Colors.black87,
   });
 
   @override
@@ -30,10 +32,10 @@ class RoleSelectionCard extends StatelessWidget {
         height: 180,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.grey.shade200 : Colors.grey.shade50,
+          color: isSelected ? selectedColor : Colors.grey.shade100,
           border: Border.all(
-            color: isSelected ? Colors.grey.shade800 : Colors.grey.shade300,
-            width: isSelected ? 2.5 : 1.5,
+            color: isSelected ? selectedBorderColor : Colors.white,
+            width: isSelected ? 2 : 2,
           ),
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
@@ -47,7 +49,12 @@ class RoleSelectionCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(icon, width: 32, height: 32, color: Colors.black87),
+            Image.asset(
+              icon,
+              width: 32,
+              height: 32,
+              color: isSelected ? iconSelectedColor : Colors.black87,
+            ),
             const SizedBox(height: 8),
             Text(
               title,
