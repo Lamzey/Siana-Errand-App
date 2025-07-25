@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+
 
   String selectedRole = 'Client';
   bool isIos = Platform.isIOS;
@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
+  
     super.dispose();
   }
 
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text(
           'Login',
           style: TextStyle(
-            color: Colors.black87,
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w700,
           ),
@@ -151,26 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
 
-                const SizedBox(height: 20),
-
-                // Confirm Password Field
-                CustomTextField(
-                  label: 'Confirm Password',
-                  hintText: '••••••••',
-                  isPassword: true,
-                  prefixIcon: Icons.lock_outline,
-                  controller: _confirmPasswordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
-                    }
-                    if (value != _passwordController.text) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
-                ),
-
                 const SizedBox(height: 32),
 
                 // Create Account Button
@@ -180,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: _handleCreateAccount,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black87,
+                      backgroundColor: Colors.grey.shade700,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
@@ -188,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       elevation: 0,
                     ),
                     child: const Text(
-                      'Create Account',
+                      'Log in',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
