@@ -7,7 +7,6 @@ import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/auth/widgets/customTextfield_widgets.dart';
 import 'package:siana_erran_app/features/auth/widgets/roleSelection_Card_widget.dart';
 import 'package:siana_erran_app/features/auth/widgets/social_logins_btn.dart';
-import 'package:siana_erran_app/widgets/custom_logo.dart';
 
 // Main SignUp Screen
 class LoginScreen extends StatefulWidget {
@@ -22,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-
   String selectedRole = 'Client';
   bool isIos = Platform.isIOS;
 
@@ -30,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-  
     super.dispose();
   }
 
@@ -41,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
           onPressed: () => Navigator.of(context).pop(),
@@ -50,8 +47,8 @@ class _LoginScreenState extends State<LoginScreen> {
           'Login',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
         ),
         centerTitle: true,
@@ -63,22 +60,14 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child: Column(
               children: [
-                // Join SIANA Text
+                // Welcome Back Text
                 const Text(
                   'Welcome Back!',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
-                ),
-
-                const SizedBox(height: 8),
-
-                // Subtitle
-                const Text(
-                  'Choose your role to get started securely.',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
 
                 const SizedBox(height: 32),
@@ -114,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Email Field
                 CustomTextField(
                   label: 'Email Address',
-                  hintText: 'you@example.com',
+                  hintText: 'Enter your email',
                   prefixIcon: Icons.email_outlined,
                   controller: _emailController,
                   validator: (value) {
@@ -136,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Password Field
                 CustomTextField(
                   label: 'Password',
-                  hintText: '••••••••',
+                  hintText: 'Enter your password',
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   controller: _passwordController,
@@ -151,91 +140,179 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
 
-                const SizedBox(height: 32),
+                // Forgot Password Link
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: _handleForgotPassword,
+                    child: Text(
+                      'Forgot password?',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.blueGrey.shade400,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
 
-                // Create Account Button
+                const SizedBox(height: 16),
+
+                // Login Button
                 SizedBox(
                   width: double.infinity,
-                  height: 40,
+                  height: 48,
                   child: ElevatedButton(
-                    onPressed: _handleCreateAccount,
+                    onPressed: _handleLogin,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade700,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       elevation: 0,
                     ),
                     child: const Text(
                       'Log in',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
 
-                // Social Login Buttons
-                Wrap(
+                // Continue with Phone Number Button
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: OutlinedButton(
+                    onPressed: _handlePhoneLogin,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      side: BorderSide(color: Colors.grey.shade600, width: 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          PhosphorIcons.phone(),
+                          size: 18,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Continue with Phone Number',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // OR Divider
+                Row(
                   children: [
                     Expanded(
-                      child: SocialLoginButton(
-                        text: 'Google',
-                        icon: PhosphorIcons.googleLogo(),
-                        backgroundColor: Colors.white,
-                        textColor: Colors.black87,
-                        width: isIos ? double.infinity : 130,
-                        onPressed: () => _handleSocialLogin('Google'),
-                      ),
+                      child: Divider(color: Colors.grey.shade700, thickness: 1),
                     ),
-                    SizedBox(width: isIos ? 0 : 8, height: isIos ? 0 : 10),
-                    Expanded(
-                      child: SocialLoginButton(
-                        text: 'Facebook',
-                        icon: PhosphorIconsFill.facebookLogo,
-                        backgroundColor: const Color(0xFF1877F2),
-                        textColor: Colors.white,
-                        onPressed: () => _handleSocialLogin('Facebook'),
-                      ),
-                    ),
-                    SizedBox(width: isIos ? 0 : 8, height: isIos ? 0 : 10),
-
-                    Visibility(
-                      visible: isIos,
-                      child: Expanded(
-                        child: SocialLoginButton(
-                          text: 'Apple',
-                          icon: PhosphorIcons.appleLogo(),
-                          backgroundColor: Colors.black87,
-                          textColor: Colors.white,
-                          onPressed: () => _handleSocialLogin('Apple'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'OR',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
+                    ),
+                    Expanded(
+                      child: Divider(color: Colors.grey.shade700, thickness: 1),
                     ),
                   ],
                 ),
 
                 const SizedBox(height: 24),
 
-                // Already have account
+                // Social Login Buttons - Stacked Vertically
+                Column(
+                  children: [
+                    // Google Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: SocialLoginButton(
+                        text: 'Continue with Google',
+                        icon: PhosphorIcons.googleLogo(),
+                        backgroundColor: Colors.white,
+                        textColor: Colors.black87,
+                        onPressed: () => _handleSocialLogin('Google'),
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 12),
+
+                    // Facebook Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: SocialLoginButton(
+                        text: 'Continue with Facebook',
+                        icon: PhosphorIconsFill.facebookLogo,
+                        backgroundColor: const Color(0xFF1877F2),
+                        textColor: Colors.white,
+                        onPressed: () => _handleSocialLogin('Facebook'),
+                      ),
+                    ),
+
+                    // Apple Button (iOS only)
+                    if (isIos) ...[
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: SocialLoginButton(
+                          text: 'Continue with Apple',
+                          icon: PhosphorIcons.appleLogo(),
+                          backgroundColor: Colors.black87,
+                          textColor: Colors.white,
+                          onPressed: () => _handleSocialLogin('Apple'),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+
+                const SizedBox(height: 32),
+
+                // Don't have account text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already have an account? ',
+                      "Don't have an account? ",
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: _handleSignUp,
                       child: Text(
-                        'Log in',
+                        'Sign up',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.blueGrey.shade700,
+                          color: Colors.blueGrey.shade400,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -258,12 +335,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       children: [
                         const TextSpan(
-                          text: 'By signing up, you agree to our ',
+                          text: 'By continuing, you agree to our ',
                         ),
                         TextSpan(
-                          text: 'Terms & Conditions',
+                          text: 'Terms of Service',
                           style: TextStyle(
-                            color: Colors.blueGrey.shade700,
+                            color: Colors.blueGrey.shade400,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -271,7 +348,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextSpan(
                           text: 'Privacy Policy',
                           style: TextStyle(
-                            color: Colors.blueGrey.shade700,
+                            color: Colors.blueGrey.shade400,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -287,12 +364,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _handleCreateAccount() {
+  void _handleLogin() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Implement account creation logic
+      // TODO: Implement login logic
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Creating $selectedRole account...'),
+          content: Text('Logging in as $selectedRole...'),
           backgroundColor: Colors.green,
         ),
       );
@@ -307,5 +384,30 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.blue,
       ),
     );
+  }
+
+  void _handlePhoneLogin() {
+    // TODO: Implement phone login
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Phone login pressed'),
+        backgroundColor: Colors.orange,
+      ),
+    );
+  }
+
+  void _handleForgotPassword() {
+    // TODO: Navigate to forgot password screen
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Forgot password pressed'),
+        backgroundColor: Colors.purple,
+      ),
+    );
+  }
+
+  void _handleSignUp() {
+    // TODO: Navigate to sign up screen
+    Navigator.of(context).pushNamed('/signup');
   }
 }
