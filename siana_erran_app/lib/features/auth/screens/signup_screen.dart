@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
+import 'package:siana_erran_app/features/auth/screens/login_screen.dart';
 import 'package:siana_erran_app/features/auth/widgets/customTextfield_widgets.dart';
 import 'package:siana_erran_app/features/auth/widgets/roleSelection_Card_widget.dart';
 import 'package:siana_erran_app/features/auth/widgets/social_logins_btn.dart';
@@ -259,7 +260,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Log in',
                         style: TextStyle(

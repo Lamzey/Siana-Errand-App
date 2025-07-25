@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
+import 'package:siana_erran_app/features/auth/screens/login_screen.dart';
 import 'package:siana_erran_app/features/auth/screens/signup_screen.dart';
 import 'package:siana_erran_app/providers/theme_provider.dart';
 import 'package:siana_erran_app/widgets/custom_btn.dart';
@@ -80,7 +81,12 @@ class AuthScreen extends StatelessWidget {
               // Log in button
               CustomButtonTxt(
                 text: "Log in",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
                 height: 50,
                 width: MediaQuery.of(context).size.width * 0.9,
                 borderRadius: 25,
