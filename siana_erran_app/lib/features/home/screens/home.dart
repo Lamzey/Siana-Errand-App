@@ -38,16 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      leading: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: const Icon(Icons.menu, color: Colors.black54),
-        ),
-      ),
+      automaticallyImplyLeading: false,
       title: const Text(
         'Home',
         style: TextStyle(
@@ -104,17 +95,18 @@ class GreetingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(height: 10),
         const Text(
           'Hi Gao, Ready To Send An Errand?',
           style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
             color: Colors.black87,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 40),
         CreateErrandButton(),
       ],
     );
