@@ -12,6 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData avatarIcon;
   final double elevation;
   final bool centerTitle;
+  final bool addLeading;
 
   const CustomAppBar({
     super.key,
@@ -26,6 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.avatarIcon = Icons.person,
     this.elevation = 0,
     this.centerTitle = true,
+    this.addLeading = false,
   });
 
   @override
@@ -34,6 +36,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       elevation: elevation,
       automaticallyImplyLeading: false,
+      leading: addLeading
+          ? const Icon(Icons.chevron_left, color: Colors.black, size: 32)
+          : null,
       title: Text(
         title,
         style: TextStyle(
