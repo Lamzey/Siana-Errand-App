@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:siana_erran_app/features/profile/screens/profile_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -13,6 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double elevation;
   final bool centerTitle;
   final bool addLeading;
+  final bool addProfile;
 
   const CustomAppBar({
     super.key,
@@ -28,6 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
     this.centerTitle = true,
     this.addLeading = false,
+    this.addProfile = true,
   });
 
   @override
@@ -37,7 +41,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: elevation,
       automaticallyImplyLeading: false,
       leading: addLeading
-          ? const Icon(Icons.chevron_left, color: Colors.black, size: 32)
+          ? InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: const Icon(
+                Icons.chevron_left,
+                color: Colors.black,
+                size: 32,
+              ),
+            )
           : null,
       title: Text(
         title,

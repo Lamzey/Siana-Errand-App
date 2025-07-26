@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final bool addLeading;
+  const ProfileScreen({super.key, this.addLeading = false});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(title: "My Profile"),
+      appBar: CustomAppBar(title: "My Profile", addLeading: addLeading),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

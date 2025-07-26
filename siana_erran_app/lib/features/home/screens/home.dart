@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:siana_erran_app/features/home/widgets/active_erran_card_widget.dart';
 import 'package:siana_erran_app/features/home/widgets/others_widgets.dart';
 import 'package:siana_erran_app/features/home/widgets/past_erran_sections_widget.dart';
+import 'package:siana_erran_app/features/profile/screens/profile_screen.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 // Main Home Screen
@@ -12,7 +14,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(
+        addLeading: false,
+        onAvatarTapped: () {
+          pushScreen(context, screen: ProfileScreen(addLeading: true));
+        },
+      ),
       body: const SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
