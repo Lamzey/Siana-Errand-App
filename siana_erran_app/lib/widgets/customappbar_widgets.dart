@@ -1,64 +1,67 @@
-
-
-
-
-// Custom App Bar Widget
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  final String title;
+  final VoidCallback? onNotificationPressed;
+  final VoidCallback? onAvatarTapped;
+  final Color backgroundColor;
+  final Color titleColor;
+  final Color notificationIconColor;
+  final Color? avatarBackgroundColor;
+  final IconData notificationIcon;
+  final IconData avatarIcon;
+  final double elevation;
+  final bool centerTitle;
+
+  const CustomAppBar({
+    super.key,
+    this.title = 'Home',
+    this.onNotificationPressed,
+    this.onAvatarTapped,
+    this.backgroundColor = Colors.white,
+    this.titleColor = Colors.black,
+    this.notificationIconColor = Colors.black54,
+    this.avatarBackgroundColor,
+    this.notificationIcon = Icons.notifications_outlined,
+    this.avatarIcon = Icons.person,
+    this.elevation = 0,
+    this.centerTitle = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
       automaticallyImplyLeading: false,
-      title: const Text(
-        'Home',
+      title: Text(
+        title,
         style: TextStyle(
-          color: Colors.black,
+          color: titleColor,
           fontSize: 18,
           fontWeight: FontWeight.w600,
         ),
       ),
-      centerTitle: true,
-      actions: const [
-        NotificationButton(),
-        SizedBox(width: 8),
-        UserAvatar(),
-        SizedBox(width: 16),
+      centerTitle: centerTitle,
+      actions: [
+        IconButton(
+          onPressed: onNotificationPressed,
+          icon: Icon(notificationIcon, color: notificationIconColor),
+        ),
+        const SizedBox(width: 8),
+        GestureDetector(
+          onTap: onAvatarTapped,
+          child: CircleAvatar(
+            radius: 16,
+            backgroundColor: avatarBackgroundColor ?? Colors.orange[300],
+            child: Icon(avatarIcon, color: Colors.white, size: 18),
+          ),
+        ),
+        const SizedBox(width: 16),
       ],
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-// Notification Button Widget
-class NotificationButton extends StatelessWidget {
-  const NotificationButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.notifications_outlined, color: Colors.black54),
-    );
-  }
-}
-
-// User Avatar Widget
-class UserAvatar extends StatelessWidget {
-  const UserAvatar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 16,
-      backgroundColor: Colors.orange[300],
-      child: const Icon(Icons.person, color: Colors.white, size: 18),
-    );
-  }
 }
