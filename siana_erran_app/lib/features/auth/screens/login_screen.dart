@@ -349,9 +349,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _handleLogin() {
-    pushReplacementWithNavBar(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BottomNavBar(initialIndex: 0)),
+      (route) => false,
     );
     if (_formKey.currentState!.validate()) {
       // TODO: Implement login logic

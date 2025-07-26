@@ -337,9 +337,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _handleCreateAccount() {
-    pushReplacementWithNavBar(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BottomNavBar(initialIndex: 0)),
+      (route) => false,
     );
     if (_formKey.currentState!.validate()) {
       // TODO: Implement account creation logic
@@ -353,9 +354,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _handleSocialLogin(String provider) {
-    pushReplacementWithNavBar(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => BottomNavBar(initialIndex: 0)),
+      (route) => false,
     );
     // TODO: Implement social login
     ScaffoldMessenger.of(context).showSnackBar(
