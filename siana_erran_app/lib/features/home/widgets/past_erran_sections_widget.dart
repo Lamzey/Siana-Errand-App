@@ -1,6 +1,9 @@
 
 // Past Errands Section Widget
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/features/home/widgets/others_widgets.dart';
 
 class PastErrandsSection extends StatelessWidget {
@@ -8,27 +11,33 @@ class PastErrandsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SectionTitle(title: 'Past Errands'),
-        const SizedBox(height: 16),
-        PastErrandItem(
-          title: 'Coffee Delivery',
-          date: 'Yesterday, 06:15 AM',
-          price: '\$8.50',
-        ),
-        PastErrandItem(
-          title: 'Package Drop-off',
-          date: 'Jan 24, 2024',
-          price: '\$12.00',
-        ),
-        PastErrandItem(
-          title: 'Pharmacy Pickup',
-          date: 'Jan 22, 2024',
-          price: '\$15.25',
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          PastErrandItem(
+            title: 'Coffee Delivery',
+            date: 'Yesterday, 06:15 AM',
+            price: '\$8.50',
+          ),
+        
+          PastErrandItem(
+            title: 'Package Drop-off',
+            date: 'Jan 24, 2024',
+            price: '\$12.00',
+          ),
+          PastErrandItem(
+            title: 'Pharmacy Pickup',
+            date: 'Jan 22, 2024',
+            price: '\$15.25',
+          ),
+        ],
+      ),
     );
   }
 }
@@ -57,30 +66,37 @@ class PastErrandItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 2),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withValues(alpha: 0.05),
+              //     blurRadius: 10,
+              //     offset: const Offset(0, 2),
+              //   ),
+              // ],
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: PastErrandInfo(title: title, date: date),
+            child: Row(
+              children: [
+                Expanded(
+                  child: PastErrandInfo(title: title, date: date),
+                ),
+                PastErrandPrice(price: price),
+                const SizedBox(width: 8),
+                ReorderButton(onPressed: onReorder),
+              ],
             ),
-            PastErrandPrice(price: price),
-            const SizedBox(width: 8),
-            ReorderButton(onPressed: onReorder),
-          ],
-        ),
+          ),
+          Divider(color: Colors.grey.shade300),
+        ],
       ),
     );
   }
@@ -102,8 +118,8 @@ class PastErrandInfo extends StatelessWidget {
           title,
           style: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
           ),
         ),
         const SizedBox(height: 4),
@@ -144,18 +160,34 @@ class ReorderButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(16),
+          // Border and Icon Color change based on status (success: green)
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(color: Colors.greenAccent)
+
         ),
-        child: const Text(
-          'Reorder',
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.black54,
-            fontWeight: FontWeight.w500,
-          ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Transform.rotate(
+              angle:
+                  math.pi /
+                  1.68, // Rotates 90 degrees clockwise (use math.pi for radians)
+              child: Icon(PhosphorIconsRegular.gitDiff, color: Colors.green),
+            ),
+            SizedBox(width: 10),
+            Text(
+              'Reorder',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.green.shade800,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,6 +1,51 @@
 // Active Errand Card Widget
 import 'package:flutter/material.dart';
 
+
+
+// Active Errands Section Widget
+class ActiveErrandsSection extends StatelessWidget {
+  const ActiveErrandsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        ActiveErrandCard(
+          icon: Icons.shopping_cart_outlined,
+          title: 'Grocery Delivery',
+          time: '10:30 AM',
+          status: 'In Progress',
+          progress: 0.6,
+          price: 'ETA 15 min',
+          statusColor: Colors.deepPurpleAccent,
+        ),
+        const SizedBox(height: 12),
+        ActiveErrandCard(
+          icon: Icons.description_outlined,
+          title: 'Document Pickup',
+          time: '12:00 PM',
+          status: 'Pending',
+          progress: 0.3,
+          price: 'ETA 30 min',
+          statusColor: Colors.orange,
+        ),
+        const SizedBox(height: 12),
+        ActiveErrandCard(
+          icon: Icons.local_laundry_service_outlined,
+          title: 'Laundry Service',
+          time: '04:45 PM',
+          status: 'In Progress',
+          progress: 0.8,
+          price: 'ETA 45 min',
+          statusColor: Colors.blue,
+        ),
+      ],
+    );
+  }
+}
 class ActiveErrandCard extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -41,6 +86,7 @@ class ActiveErrandCard extends StatelessWidget {
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Row(
               children: [
@@ -55,11 +101,12 @@ class ActiveErrandCard extends StatelessWidget {
                 ),
                 ErrandTimePrice(time: time, price: price),
                 const SizedBox(width: 8),
-                const Icon(Icons.chevron_right, color: Colors.black26),
               ],
             ),
             const SizedBox(height: 12),
             ErrandProgressBar(progress: progress, color: statusColor),
+            const SizedBox(height: 15),
+            const Icon(Icons.chevron_right, color: Colors.black26),
           ],
         ),
       ),
@@ -109,7 +156,7 @@ class ErrandInfo extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
           ),
@@ -145,13 +192,17 @@ class ErrandTimePrice extends StatelessWidget {
           style: const TextStyle(
             fontSize: 14,
             color: Colors.black54,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           price,
-          style: const TextStyle(fontSize: 12, color: Colors.black54),
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black54,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
