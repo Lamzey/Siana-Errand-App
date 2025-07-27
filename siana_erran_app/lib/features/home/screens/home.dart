@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:siana_erran_app/features/Errands/screens/create_errand_screen.dart';
 import 'package:siana_erran_app/features/home/widgets/active_erran_card_widget.dart';
 import 'package:siana_erran_app/features/home/widgets/others_widgets.dart';
 import 'package:siana_erran_app/features/home/widgets/past_erran_sections_widget.dart';
@@ -64,14 +65,12 @@ class GreetingSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 40),
-        CreateErrandButton(),
+        CreateErrandButton(
+          onTap: () {
+            pushScreenWithNavBar(context, CreateErrandScreen());
+          },
+        ),
       ],
     );
   }
 }
-
-
-
-
-
-

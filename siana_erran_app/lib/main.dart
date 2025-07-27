@@ -5,6 +5,9 @@ import 'package:siana_erran_app/core/theme/app_theme.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/welcome/screens/launch_screen.dart';
 import 'package:siana_erran_app/features/welcome/screens/welcome_screen.dart';
+import 'package:siana_erran_app/providers/errand/location_provider.dart';
+import 'package:siana_erran_app/providers/errand/task_provider.dart';
+import 'package:siana_erran_app/providers/errand/ui_state_provider.dart';
 import 'package:siana_erran_app/providers/theme_provider.dart';
 
 void main() {
@@ -19,6 +22,11 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider<TaskProvider>(create: (_) => TaskProvider()),
+        ChangeNotifierProvider(create: (_) => LocationProvider()),
+        ChangeNotifierProvider<UIStateProvider>(
+          create: (_) => UIStateProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
