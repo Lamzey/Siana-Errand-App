@@ -1,7 +1,9 @@
 // Active Errand Card Widget
 import 'package:flutter/material.dart';
-
-
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:siana_erran_app/core/models/Errands/errands_model.dart';
+import 'package:siana_erran_app/features/Errands/constants/details_errand_contsants.dart';
+import 'package:siana_erran_app/features/Errands/screens/errand_details_screen.dart';
 
 // Active Errands Section Widget
 class ActiveErrandsSection extends StatelessWidget {
@@ -12,40 +14,33 @@ class ActiveErrandsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 16),
-        ActiveErrandCard(
-          icon: Icons.shopping_cart_outlined,
-          title: 'Grocery Delivery',
-          time: '10:30 AM',
-          status: 'In Progress',
-          progress: 0.6,
-          price: 'ETA 15 min',
-          statusColor: Colors.deepPurpleAccent,
-        ),
-        const SizedBox(height: 12),
-        ActiveErrandCard(
-          icon: Icons.description_outlined,
-          title: 'Document Pickup',
-          time: '12:00 PM',
-          status: 'Pending',
-          progress: 0.3,
-          price: 'ETA 30 min',
-          statusColor: Colors.orange,
-        ),
-        const SizedBox(height: 12),
-        ActiveErrandCard(
-          icon: Icons.local_laundry_service_outlined,
-          title: 'Laundry Service',
-          time: '04:45 PM',
-          status: 'In Progress',
-          progress: 0.8,
-          price: 'ETA 45 min',
-          statusColor: Colors.blue,
-        ),
+        ...List.generate(sampleErrands.length, (index) {
+          var errands = sampleErrands[index];
+          return Padding(
+            padding: const EdgeInsets.only(top: 12, bottom: 12),
+            child: ActiveErrandCard(
+              onTap: () {
+                pushScreenWithNavBar(
+                  context,
+                  ErrandsDetailsScreen(errand: errands),
+                );
+              },
+              icon: Icons.task_rounded,
+              title: errands.title,
+              time: "${errands.createdAt}",
+              status: errands.status.name,
+              progress: 0.6,
+              price:
+                  '${errands.timeDetails.timeZone} ${errands.timeDetails.durationText}',
+              statusColor: errands.status.statusColor,
+            ),
+          );
+        }),
       ],
     );
   }
 }
+
 class ActiveErrandCard extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -113,8 +108,6 @@ class ActiveErrandCard extends StatelessWidget {
     );
   }
 }
-
-
 
 // Errand Icon Widget
 class ErrandIcon extends StatelessWidget {

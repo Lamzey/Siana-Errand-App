@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:intl/intl.dart';
 
-part 'errand_model.g.dart';
+part 'errands_model.g.dart';
 
 @JsonSerializable()
 class ErrandModel {
