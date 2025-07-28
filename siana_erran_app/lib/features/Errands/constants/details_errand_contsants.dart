@@ -1,0 +1,112 @@
+
+  // Sample data for demonstration
+ import 'package:siana_erran_app/core/models/Errands/errands_model.dart';
+
+final List<ErrandModel> sampleErrands = [
+    ErrandModel(
+      id: 'ERR001',
+      title: 'Document Delivery',
+      description: 'Deliver important documents to client office',
+      status: ErrandStatus.inProgress,
+      agent: AgentModel(
+        id: 'AGT001',
+        name: 'Amara N.',
+        profileImage: '', // Empty for demo, will show placeholder
+        rating: 4.9,
+        totalRatings: 156,
+        agentCode: 'SIANA007',
+        vehicle: VehicleModel(
+          make: 'Toyota',
+          model: 'Corolla',
+          color: 'Silver',
+          plateNumber: 'ABC123',
+          type: 'car',
+        ),
+        phoneNumber: '+1234567890',
+        isOnline: true,
+      ),
+      pickupLocation: LocationModel(
+        address: '123 Business Rd, New York',
+        name: 'Acme Inc. Office',
+        latitude: 40.7128,
+        longitude: -74.0060,
+        type: LocationType.office,
+      ),
+      destination: LocationModel(
+        address: '789 Residential St, New York',
+        name: 'Home',
+        latitude: 40.7589,
+        longitude: -73.9851,
+        type: LocationType.home,
+      ),
+      timeDetails: TimeModel(
+        scheduledTime: DateTime.now().add(const Duration(hours: 2)),
+        estimatedDurationMinutes: 60,
+        timeZone: 'EST',
+      ),
+      payment: PaymentModel(
+        amount: 25.50,
+        currency: 'USD',
+        paymentMethod: PaymentMethod.debitCard,
+        cardLast4: '8901',
+        paymentStatus: PaymentStatus.completed,
+      ),
+      mapCoordinates: [40.7128, -74.0060],
+      createdAt: DateTime.now().subtract(const Duration(hours: 1)),
+    ),
+    ErrandModel(
+      id: 'ERR002',
+      title: 'Grocery Shopping',
+      description: 'Weekly grocery shopping for household items',
+      status: ErrandStatus.completed,
+      agent: AgentModel(
+        id: 'AGT002',
+        name: 'John D.',
+        profileImage: '',
+        rating: 4.7,
+        totalRatings: 89,
+        agentCode: 'SIANA012',
+        vehicle: VehicleModel(
+          make: 'Honda',
+          model: 'Civic',
+          color: 'Blue',
+          plateNumber: 'XYZ789',
+          type: 'car',
+        ),
+        phoneNumber: '+1234567891',
+        isOnline: false,
+      ),
+      pickupLocation: LocationModel(
+        address: '456 Mall Ave, New York',
+        name: 'SuperMart',
+        latitude: 40.7505,
+        longitude: -73.9934,
+        type: LocationType.business,
+      ),
+      destination: LocationModel(
+        address: '789 Residential St, New York',
+        name: 'Home',
+        latitude: 40.7589,
+        longitude: -73.9851,
+        type: LocationType.home,
+      ),
+      timeDetails: TimeModel(
+        scheduledTime: DateTime.now().subtract(const Duration(hours: 3)),
+        actualStartTime: DateTime.now().subtract(const Duration(hours: 3)),
+        actualEndTime: DateTime.now().subtract(const Duration(hours: 1)),
+        estimatedDurationMinutes: 120,
+        timeZone: 'EST',
+      ),
+      payment: PaymentModel(
+        amount: 45.00,
+        currency: 'USD',
+        paymentMethod: PaymentMethod.creditCard,
+        cardLast4: '4567',
+        paymentStatus: PaymentStatus.completed,
+        paidAt: DateTime.now().subtract(const Duration(hours: 1)),
+      ),
+      mapCoordinates: [40.7505, -73.9934],
+      createdAt: DateTime.now().subtract(const Duration(hours: 4)),
+      completedAt: DateTime.now().subtract(const Duration(hours: 1)),
+    ),
+  ];
