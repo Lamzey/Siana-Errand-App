@@ -5,38 +5,38 @@ import 'package:siana_erran_app/core/models/Errands/errands_model.dart';
 import 'package:siana_erran_app/features/Errands/constants/details_errand_contsants.dart';
 import 'package:siana_erran_app/features/Errands/screens/errand_details_screen.dart';
 
-// Active Errands Section Widget
+import 'package:flutter/material.dart';
+
 class ActiveErrandsSection extends StatelessWidget {
   const ActiveErrandsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ...List.generate(sampleErrands.length, (index) {
-          var errands = sampleErrands[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: 12, bottom: 12),
-            child: ActiveErrandCard(
-              onTap: () {
-                pushScreenWithNavBar(
-                  context,
-                  ErrandsDetailsScreen(errand: errands),
-                );
-              },
-              icon: Icons.task_rounded,
-              title: errands.title,
-              time: "${errands.createdAt}",
-              status: errands.status.name,
-              progress: 0.6,
-              price:
-                  '${errands.timeDetails.timeZone} ${errands.timeDetails.durationText}',
-              statusColor: errands.status.statusColor,
-            ),
-          );
-        }),
-      ],
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: sampleErrands.length,
+      itemBuilder: (context, index) {
+        var errands = sampleErrands[index];
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: ActiveErrandCard(
+            onTap: () {
+              pushScreenWithNavBar(
+                context,
+                ErrandsDetailsScreen(errand: errands),
+              );
+            },
+            icon: Icons.task_rounded,
+            title: errands.title,
+            time: errands.timeDetails.formattedScheduledTime,
+            status: errands.status.name,
+            progress: 0.6,
+            price:
+                'ETA: ${errands.timeDetails.estimatedDurationMinutes} min',
+            statusColor: errands.status.statusColor,
+          ),
+        );
+      },
     );
   }
 }
