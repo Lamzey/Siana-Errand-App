@@ -3,6 +3,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/core/models/Errands/errands_model.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/Errands/constants/details_errand_contsants.dart';
+import 'package:siana_erran_app/features/home/widgets/others_widgets.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 class ErrandsDetailsScreen extends StatefulWidget {
@@ -284,16 +285,10 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          
           const Padding(
             padding: EdgeInsets.all(16),
-            child: Text(
-              'Errand Details',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
+            child: SectionTitle(title: "Errand Details"),
           ),
 
           _buildDetailItem(
@@ -336,14 +331,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
         children: [
           const Padding(
             padding: EdgeInsets.all(16),
-            child: Text(
-              'Payment Information',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
+            child: SectionTitle(title: "Payment Information"),
           ),
 
           Padding(
@@ -367,6 +355,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                   
                       const Text(
                         'Payment Details',
                         style: TextStyle(
@@ -505,8 +494,13 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
     bool showDuration = false,
     String? duration,
   }) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: BoxBorder.fromLTRB(bottom: BorderSide(color: Colors.grey)),
+      ),
       child: Row(
         children: [
           Container(
@@ -514,6 +508,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
+
             ),
             child: Icon(icon, color: Colors.grey[600], size: 20),
           ),
@@ -527,7 +522,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                    color: Colors.black,
                   ),
                 ),
                 Text(
