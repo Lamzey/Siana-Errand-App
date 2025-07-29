@@ -35,7 +35,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
             _buildMapWithAgentProfile(),
             
             // Add spacing for the floating profile card
-            const SizedBox(height: 90), // Adjust based on profile card height
+            const SizedBox(height: 150), // Adjust based on profile card height
             
             // Errand Details Section
             _buildErrandDetailsSection(),
@@ -73,7 +73,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
         Positioned(
           left: 12,
           right: 12,
-          bottom: -85, // Position it to float below the map
+          bottom: -130, // Position it to float below the map
           child: _buildAgentProfileSection(),
         ),
       ],
@@ -90,6 +90,13 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
           image: AssetImage('${imagePath}maps.png'),
           fit: BoxFit.cover,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Stack(
         children: [
