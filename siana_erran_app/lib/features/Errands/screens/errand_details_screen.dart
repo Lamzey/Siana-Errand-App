@@ -342,7 +342,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                   child: const Icon(
                     Icons.credit_card,
@@ -390,16 +390,10 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          
           const Padding(
             padding: EdgeInsets.all(16),
-            child: Text(
-              'Share & Safety',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
+            child: SectionTitle(title: "Share & Safety"),
           ),
 
           Padding(
@@ -410,7 +404,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                   child: const Icon(
                     Icons.share_outlined,
@@ -507,7 +501,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(50),
 
             ),
             child: Icon(icon, color: Colors.grey[600], size: 20),
