@@ -8,8 +8,16 @@ import 'package:siana_erran_app/features/profile/screens/profile_screen.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 // Main Home Screen
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool minActive = true;
+  bool minPast = true;
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +29,57 @@ class HomeScreen extends StatelessWidget {
           pushScreen(context, screen: ProfileScreen(addLeading: true));
         },
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GreetingSection(),
             SizedBox(height: 32),
-            SectionTitle(title: 'Active Errands', fontSize: 20),
-            ActiveErrandsSection(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SectionTitle(title: 'Active Errands', fontSize: 20),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      minActive = !minActive;
+                    });
+                  },
+                  icon: Icon(
+                    minActive
+                        ? Icons.arrow_drop_down_rounded
+                        : Icons.arrow_drop_up_outlined,
+                    size: 32,
+                  ),
+                ),
+              ],
+            ),
+            Visibility(visible: minActive, child: ActiveErrandsSection()),
             SizedBox(height: 32),
-            SectionTitle(title: 'Past Errands', fontSize: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SectionTitle(title: 'Past Errands', fontSize: 20),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      minPast = !minPast;
+                    });
+                  },
+                  icon: Icon(
+                    minPast
+                        ? Icons.arrow_drop_down_rounded
+                        : Icons.arrow_drop_up_outlined,
+                    size: 32,
+                  ),
+                ),
+              ],
+            ),
             SizedBox(height: 16),
-            PastErrandsSection(),
+            Visibility(visible: minPast, child: PastErrandsSection()),
             SizedBox(height: 32),
             SectionTitle(title: 'Need Help?', fontSize: 20),
             SizedBox(height: 8),

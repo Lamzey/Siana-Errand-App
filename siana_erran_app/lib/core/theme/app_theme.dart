@@ -1,36 +1,96 @@
 import 'package:flutter/material.dart';
 
-// Define the light color scheme based on the SignUp screen
+// Light color scheme
 final lightColorScheme = ColorScheme(
-  primary: Color(0xFF007AFF), // Accent color for links and highlights
-  secondary: Color(0xFF007AFF), // Assuming secondary is similar to primary
-  surface: Color(0xFFFFFFFF), // Card and elevated surfaces
+  primary: Color(0xFF007AFF),
+  secondary: Color(0xFF007AFF),
+  surface: Color(0xFFFFFFFF),
   error: Color(0xFFFF0000),
   onPrimary: Color(0xFFFFFFFF),
   onSecondary: Color(0xFFFFFFFF),
   onSurface: Color(0xFF000000),
   onError: Color(0xFFFFFFFF),
-  brightness: Brightness.light, // Corrected to Brightness enum
+  brightness: Brightness.light,
 );
 
-// Define the text theme using the custom font "Poppins" with Material 3 properties
+// TextTheme all in GothamRounded
 final textTheme = TextTheme(
-  headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Poppins'), // Updated from headline1
-  labelLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Poppins'), // Updated from button
-  bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, fontFamily: 'Poppins'), // Updated from bodyText1
-  bodySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, fontFamily: 'Poppins'), // Updated from caption
-);
-
-// Customize the elevated button theme to match the primary button style
-final elevatedButtonTheme = ElevatedButtonThemeData(
-  style: ElevatedButton.styleFrom(
-    backgroundColor: Color(0xFF000000), // Updated from primary
-    foregroundColor: Color(0xFFFFFFFF), // Updated from onPrimary
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+  headlineLarge: TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'GothamRounded',
+  ),
+  headlineMedium: TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'GothamRounded',
+  ),
+  headlineSmall: TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'GothamRounded',
+  ),
+  titleLarge: TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'GothamRounded',
+  ),
+  titleMedium: TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'GothamRounded',
+  ),
+  titleSmall: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'GothamRounded',
+  ),
+  bodyLarge: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    fontFamily: 'GothamRounded',
+  ),
+  bodyMedium: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+    fontFamily: 'GothamRounded',
+  ),
+  bodySmall: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    fontFamily: 'GothamRounded',
+  ),
+  labelLarge: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'GothamRounded',
+  ),
+  labelMedium: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'GothamRounded',
+  ),
+  labelSmall: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'GothamRounded',
   ),
 );
 
-// Set up the input decoration theme for text fields
+// Elevated button theme (GothamRounded)
+final elevatedButtonTheme = ElevatedButtonThemeData(
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Color(0xFF000000),
+    foregroundColor: Color(0xFFFFFFFF),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    textStyle: TextStyle(
+      fontFamily: 'GothamRounded',
+      fontWeight: FontWeight.w500,
+    ),
+  ),
+);
+
+// Input fields (GothamRounded)
 final inputDecorationTheme = InputDecorationTheme(
   filled: true,
   fillColor: Color(0xFFFFFFFF),
@@ -38,11 +98,11 @@ final inputDecorationTheme = InputDecorationTheme(
     borderRadius: BorderRadius.circular(8),
     borderSide: BorderSide(color: Color(0xFFE0E0E0)),
   ),
-  labelStyle: TextStyle(color: Color(0xFF666666)),
-  hintStyle: TextStyle(color: Color(0xFF666666)),
+  labelStyle: TextStyle(color: Color(0xFF666666), fontFamily: 'GothamRounded'),
+  hintStyle: TextStyle(color: Color(0xFF666666), fontFamily: 'GothamRounded'),
 );
 
-// Define the main theme data for the light theme
+// Light ThemeData
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: lightColorScheme,
@@ -51,10 +111,10 @@ final ThemeData lightTheme = ThemeData(
   inputDecorationTheme: inputDecorationTheme,
   iconTheme: IconThemeData(color: Color(0xFF000000)),
   primaryIconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
-  fontFamily: 'Poppins',
+  fontFamily: 'GothamRounded',
 );
 
-// Optional dark theme (if needed)
+// Dark color scheme
 final darkColorScheme = ColorScheme(
   primary: Color(0xFF007AFF),
   secondary: Color(0xFF007AFF),
@@ -64,17 +124,23 @@ final darkColorScheme = ColorScheme(
   onSecondary: Color(0xFFFFFFFF),
   onSurface: Color(0xFFFFFFFF),
   onError: Color(0xFFFFFFFF),
-  brightness: Brightness.dark, // Corrected to Brightness enum
+  brightness: Brightness.dark,
 );
 
+// Dark Elevated button (GothamRounded)
 final elevatedButtonThemeDark = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
     backgroundColor: Color(0xFF424242),
     foregroundColor: Color(0xFFFFFFFF),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    textStyle: TextStyle(
+      fontFamily: 'GothamRounded',
+      fontWeight: FontWeight.w500,
+    ),
   ),
 );
 
+// Dark inputs (GothamRounded)
 final inputDecorationThemeDark = InputDecorationTheme(
   filled: true,
   fillColor: Color(0xFF424242),
@@ -82,10 +148,11 @@ final inputDecorationThemeDark = InputDecorationTheme(
     borderRadius: BorderRadius.circular(8),
     borderSide: BorderSide(color: Color(0xFF424242)),
   ),
-  labelStyle: TextStyle(color: Color(0xFFB0B0B0)),
-  hintStyle: TextStyle(color: Color(0xFF666666)),
+  labelStyle: TextStyle(color: Color(0xFFB0B0B0), fontFamily: 'GothamRounded'),
+  hintStyle: TextStyle(color: Color(0xFF666666), fontFamily: 'GothamRounded'),
 );
 
+// Dark ThemeData
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: darkColorScheme,
@@ -94,5 +161,5 @@ final ThemeData darkTheme = ThemeData(
   inputDecorationTheme: inputDecorationThemeDark,
   iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   primaryIconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
-  fontFamily: 'Poppins',
+  fontFamily: 'GothamRounded',
 );

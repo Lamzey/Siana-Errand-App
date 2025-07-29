@@ -13,6 +13,7 @@ class ActiveErrandsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: sampleErrands.length,
       itemBuilder: (context, index) {
