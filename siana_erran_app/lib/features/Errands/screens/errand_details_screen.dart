@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/core/models/Errands/errands_model.dart';
+import 'package:siana_erran_app/core/utils/assets_utiles.dart';
 import 'package:siana_erran_app/features/Errands/constants/details_errand_contsants.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
@@ -29,17 +31,12 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Map Section
-            _buildMapSection(),
-
-            // Agent Profile Section
-            _buildAgentProfileSection(),
-
-            // Action Buttons
-            _buildActionButtons(),
-
-            const SizedBox(height: 8),
-
+            // Map Section with floating agent profile
+            _buildMapWithAgentProfile(),
+            
+            // Add spacing for the floating profile card
+            const SizedBox(height: 90), // Adjust based on profile card height
+            
             // Errand Details Section
             _buildErrandDetailsSection(),
 
@@ -65,20 +62,38 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
     );
   }
 
+  Widget _buildMapWithAgentProfile() {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        // Map Section
+        _buildMapSection(),
+
+        // Floating Agent Profile Section
+        Positioned(
+          left: 12,
+          right: 12,
+          bottom: -90, // Position it to float below the map
+          child: _buildAgentProfileSection(),
+        ),
+      ],
+    );
+  }
+
   Widget _buildMapSection() {
     return Container(
-      height: 200,
+      height: MediaQuery.sizeOf(context).height * 0.25,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.teal[100],
+        color: Colors.white,
         image: const DecorationImage(
-          image: AssetImage('assets/images/map_placeholder.png'),
+          image: AssetImage('${imagePath}maps.png'),
           fit: BoxFit.cover,
         ),
       ),
       child: Stack(
         children: [
-          Container(color: Colors.teal[300]),
+      
           // Pickup location marker
           const Positioned(
             left: 60,
@@ -121,103 +136,137 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      color: Colors.white,
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 25,
-            backgroundColor: Colors.orange[200],
-            backgroundImage: agent.profileImage.isNotEmpty
-                ? NetworkImage(agent.profileImage)
-                : null,
-            child: agent.profileImage.isEmpty
-                ? const Icon(Icons.person, color: Colors.white, size: 30)
-                : null,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  agent.displayName,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
-                Row(
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 26,
+                backgroundColor: Colors.orange[200],
+                backgroundImage: agent.profileImage.isNotEmpty
+                    ? NetworkImage(agent.profileImage)
+                    : null,
+                child: agent.profileImage.isEmpty
+                    ? const Icon(Icons.person, color: Colors.white, size: 30)
+                    : null,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.star, color: Colors.amber, size: 16),
                     Text(
-                      ' ${agent.ratingText}',
-                      style: const TextStyle(fontSize: 14, color: Colors.grey),
+                      agent.displayName,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                        Text(
+                          ' ${agent.ratingText}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                agent.agentCode,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
               ),
-              Text(
-                agent.vehicle.displayName,
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    agent.agentCode,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    agent.vehicle.displayName,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
+          const SizedBox(height: 16),
+          Divider(color: Colors.grey.shade300),
+          const SizedBox(height: 12),
+          _buildActionButtons(),
         ],
       ),
     );
   }
 
   Widget _buildActionButtons() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      color: Colors.white,
-      child: Row(
-        children: [
-          Expanded(
-            child: OutlinedButton.icon(
-              onPressed: () {
-                _handleChatWithAgent();
-              },
-              icon: const Icon(Icons.chat_outlined),
-              label: const Text('Chat with Agent'),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                side: BorderSide(color: Colors.grey[300]!),
-                foregroundColor: Colors.black87,
+    return Row(
+      children: [
+        Expanded(
+          child: OutlinedButton.icon(
+            onPressed: () {
+              _handleChatWithAgent();
+            },
+            icon: Icon(PhosphorIcons.chatCircle()),
+            label: const Text(
+              'Chat with Agent',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              side: BorderSide(color: Colors.grey[300]!),
+              foregroundColor: Colors.black87,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: OutlinedButton.icon(
-              onPressed: () {
-                _handleCallAgent();
-              },
-              icon: const Icon(Icons.phone_outlined),
-              label: const Text('Call Agent'),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                side: BorderSide(color: Colors.grey[300]!),
-                foregroundColor: Colors.black87,
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: OutlinedButton.icon(
+            onPressed: () {
+              _handleCallAgent();
+            },
+            icon: Icon(PhosphorIcons.phone()),
+            label: const Text(
+              'Call Agent',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              side: BorderSide(color: Colors.grey[300]!),
+              foregroundColor: Colors.black87,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -729,7 +778,6 @@ class ExampleErrandListScreen extends StatelessWidget {
       }
     });
   }
-
 }
 
 // Custom ErrandListTile widget for the list screen

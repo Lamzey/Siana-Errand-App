@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
     this.height = 56,
     this.borderRadius = 28,
     this.textStyle,
-    this.arrowIconAsset = 'assets/icons/arrow_forward.png',
+    this.arrowIconAsset,
   });
 
   @override
