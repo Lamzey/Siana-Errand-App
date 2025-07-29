@@ -146,6 +146,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
+        border: Border.all(color: Colors.grey.shade300),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
