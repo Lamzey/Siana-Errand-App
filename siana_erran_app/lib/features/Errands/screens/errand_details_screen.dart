@@ -26,7 +26,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(title: "Errand Details", addLeading: true),
       body: SingleChildScrollView(
         child: Column(
@@ -73,7 +73,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
         Positioned(
           left: 12,
           right: 12,
-          bottom: -90, // Position it to float below the map
+          bottom: -85, // Position it to float below the map
           child: _buildAgentProfileSection(),
         ),
       ],
@@ -552,7 +552,7 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.1),
+              color: statusColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
