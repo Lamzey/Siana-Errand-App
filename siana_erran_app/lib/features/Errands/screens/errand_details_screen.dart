@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:siana_erran_app/core/models/Errands/errands_model.dart';
 import 'package:siana_erran_app/core/utils/assets_utiles.dart';
-import 'package:siana_erran_app/features/Errands/constants/details_errand_contsants.dart';
+import 'package:siana_erran_app/core/utils/errand_dotted_painter.dart';
 import 'package:siana_erran_app/features/home/widgets/others_widgets.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
@@ -713,69 +713,6 @@ class _ErrandsDetailsScreenState extends State<ErrandsDetailsScreen> {
   }
 }
 
-// Custom painter for dotted line
-class DottedLinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.black54
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    const double dashWidth = 5;
-    const double dashSpace = 3;
-    double startX = 0;
-
-    while (startX < size.width) {
-      canvas.drawLine(
-        Offset(startX, size.height / 2),
-        Offset(startX + dashWidth, size.height / 2),
-        paint,
-      );
-      startX += dashWidth + dashSpace;
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
-// Example usage and navigation
-class ExampleErrandListScreen extends StatelessWidget {
-  const ExampleErrandListScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('My Errands')),
-      body: ListView.builder(
-        itemCount: sampleErrands.length,
-        itemBuilder: (context, index) {
-          final errand = sampleErrands[index];
-          return ErrandListTile(
-            errand: errand,
-            onTap: () => _navigateToErrandDetails(context, errand),
-          );
-        },
-      ),
-    );
-  }
-
-  void _navigateToErrandDetails(BuildContext context, ErrandModel errand) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ErrandsDetailsScreen(errand: errand),
-      ),
-    ).then((updatedErrand) {
-      // Handle any updates when returning from details screen
-      if (updatedErrand != null && updatedErrand is ErrandModel) {
-        // Update your state management here (Provider, Bloc, etc.)
-        print('Errand updated: ${updatedErrand.status}');
-      }
-    });
-  }
-}
 
 // Custom ErrandListTile widget for the list screen
 class ErrandListTile extends StatelessWidget {
