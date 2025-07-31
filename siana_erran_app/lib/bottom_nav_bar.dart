@@ -55,14 +55,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         title: "Profile",
       ),
     ),
-    PersistentTabConfig(
-      screen: SettingsScreen(),
-      item: ItemConfig(
-        inactiveForegroundColor: Colors.grey.shade500,
-        icon: const Icon(PhosphorIconsRegular.gear),
-        title: "Settings",
-      ),
-    ),
+
   ];
 
   @override
