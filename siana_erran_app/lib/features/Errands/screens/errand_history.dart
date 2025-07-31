@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:siana_erran_app/features/home/widgets/others_widgets.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 class ErrandHistoryScreen extends StatefulWidget {
@@ -51,15 +52,13 @@ class _ErrandHistoryScreenState extends State<ErrandHistoryScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          
           const Padding(
             padding: EdgeInsets.only(top: 16, bottom: 12),
-            child: Text(
-              'Past Errands',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+            child: SectionTitle(
+              title: "Past Errands",
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
             ),
           ),
           SingleChildScrollView(
@@ -319,13 +318,10 @@ class _ErrandHistoryScreenState extends State<ErrandHistoryScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Saved Locations',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+SectionTitle(
+          title: "Saved Locations",
+          fontSize: 24,
+          fontWeight: FontWeight.w800,
         ),
         const SizedBox(height: 16),
         SizedBox(

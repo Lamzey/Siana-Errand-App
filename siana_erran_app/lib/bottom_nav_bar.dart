@@ -33,8 +33,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ),
     ),
     PersistentTabConfig(
-      // screen: OrdersScreen(),
-      screen: ErrandHistoryScreen(),
+      screen: OrdersScreen(),
       item: ItemConfig(
         inactiveForegroundColor: Colors.grey.shade500,
         icon: const Icon(PhosphorIconsRegular.shoppingBag),
