@@ -242,24 +242,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () => _handleSocialLogin('Google'),
                       ),
                     ),
-
-                    const SizedBox(height: 14),
-
-                    // Facebook Button
-                    SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: SocialLoginButton(
-                        text: 'Continue with Facebook',
-                        fontSize: 18,
-                        icon: PhosphorIcons.facebookLogo(),
-                        iconSize: 24,
-                        backgroundColor: Colors.transparent,
-                        textColor: Colors.white,
-                        onPressed: () => _handleSocialLogin('Facebook'),
-                      ),
-                    ),
-
                     // Apple Button (iOS only)
                     if (isIos) ...[
                       const SizedBox(height: 14),

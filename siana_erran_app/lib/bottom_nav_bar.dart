@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:siana_erran_app/features/Errands/screens/errand_history.dart';
 import 'package:siana_erran_app/features/home/screens/home.dart';
 import 'package:siana_erran_app/features/orders/screens/order_screen.dart';
 import 'package:siana_erran_app/features/profile/screens/profile_screen.dart';
@@ -32,7 +33,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ),
     ),
     PersistentTabConfig(
-      screen: OrdersScreen(),
+      // screen: OrdersScreen(),
+      screen: ErrandHistoryScreen(),
       item: ItemConfig(
         inactiveForegroundColor: Colors.grey.shade500,
         icon: const Icon(PhosphorIconsRegular.shoppingBag),

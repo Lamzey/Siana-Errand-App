@@ -235,16 +235,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     SizedBox(width: isIos ? 0 : 8, height: isIos ? 0 : 10),
-                    Expanded(
-                      child: SocialLoginButton(
-                        text: 'Facebook',
-                        icon: PhosphorIconsFill.facebookLogo,
-                        backgroundColor: const Color(0xFF1877F2),
-                        textColor: Colors.white,
-                        onPressed: () => _handleSocialLogin('Facebook'),
-                      ),
-                    ),
-                    SizedBox(width: isIos ? 0 : 8, height: isIos ? 0 : 10),
 
                     Visibility(
                       visible: isIos,
