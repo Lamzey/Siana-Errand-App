@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:siana_erran_app/features/Errands/screens/errand_history.dart';
+import 'package:siana_erran_app/features/profile/screens/edit_profile_screen.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -68,7 +71,9 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(height: 16),
                       // Edit Profile Button
                       OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          pushScreenWithNavBar(context, EditProfileScreen());
+                        },
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: Colors.pink),
                           shape: RoundedRectangleBorder(
@@ -108,7 +113,9 @@ class ProfileScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.person_outline,
                 title: 'Personal Information',
-                onTap: () {},
+                onTap: () {
+                  pushScreenWithNavBar(context, ErrandHistoryScreen());
+                },
               ),
               _buildMenuItem(
                 icon: Icons.credit_card_outlined,
@@ -118,7 +125,9 @@ class ProfileScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.history,
                 title: 'Errand History',
-                onTap: () {},
+                onTap: () {
+                  pushScreenWithNavBar(context, ErrandHistoryScreen());
+                },
               ),
               _buildMenuItem(
                 icon: Icons.description_outlined,
@@ -179,8 +188,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         trailing: Icon(Icons.chevron_right, color: Colors.black),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       ),
     );
   }
