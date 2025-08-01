@@ -181,7 +181,7 @@
 //       cardTheme: CardTheme(
 //         color: lightColorScheme.surface,
 //         elevation: 2,
-//         shadowColor: Colors.black.withOpacity(0.1),
+//         shadowColor: Colors.black.withValues(alpha:0.1),
 //         shape: RoundedRectangleBorder(
 //           borderRadius: BorderRadius.circular(16),
 //         ),
@@ -245,7 +245,7 @@
 //       cardTheme: CardTheme(
 //         color: darkColorScheme.surface,
 //         elevation: 2,
-//         shadowColor: Colors.black.withOpacity(0.3),
+//         shadowColor: Colors.black.withValues(alpha:0.3),
 //         shape: RoundedRectangleBorder(
 //           borderRadius: BorderRadius.circular(16),
 //         ),
