@@ -263,7 +263,7 @@ class _WalletScreenState extends State<WalletScreen>
                             ),
                           ),
                           Text(
-                            'Completed Trades',
+                            'Completed Errands',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey[600],
