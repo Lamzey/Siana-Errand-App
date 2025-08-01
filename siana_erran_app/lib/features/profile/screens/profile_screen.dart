@@ -117,11 +117,11 @@ class ProfileScreen extends StatelessWidget {
                   pushScreenWithNavBar(context, ErrandHistoryScreen());
                 },
               ),
-              _buildMenuItem(
-                icon: Icons.credit_card_outlined,
-                title: 'Wallet',
-                onTap: () {},
-              ),
+              // _buildMenuItem(
+              //   icon: Icons.credit_card_outlined,
+              //   title: 'Wallet',
+              //   onTap: () {},
+              // ),
               _buildMenuItem(
                 icon: Icons.history,
                 title: 'Errand History',
