@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:siana_erran_app/features/Errands/screens/errand_history.dart';
 import 'package:siana_erran_app/features/profile/screens/edit_profile_screen.dart';
+import 'package:siana_erran_app/features/profile/screens/rating_reviews_screen.dart';
 import 'package:siana_erran_app/widgets/customappbar_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -137,7 +138,9 @@ class ProfileScreen extends StatelessWidget {
               _buildMenuItem(
                 icon: Icons.star_outline,
                 title: 'Ratings and Review',
-                onTap: () {},
+                onTap: () {
+                  pushScreenWithNavBar(context, RateAndReviewScreen());
+                },
               ),
             ]),
           ],
