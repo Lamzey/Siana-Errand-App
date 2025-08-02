@@ -89,7 +89,7 @@ class _WalletScreenState extends State<WalletScreen>
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: CustomAppBar(
-        title: "Payment Methods",
+        title: "Wallet",
         addLeading: widget.addBackBTN,
       ),
       body: Column(
@@ -135,7 +135,7 @@ class _WalletScreenState extends State<WalletScreen>
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Add your payment details to receive payments from other users',
+                  'Add your payment details to send payments to Errands completed',
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.9),
                     fontSize: 14,
